@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import firebase from "./firebase"
 import 'semantic-ui-css/semantic.min.css'
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './index.css';
