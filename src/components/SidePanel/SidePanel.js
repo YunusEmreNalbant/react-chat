@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Popup, Menu, Icon} from "semantic-ui-react";
 import CreateChannelForm from "../Channels/CreateChannelForm";
+import ChannelList from "../Channels/ChannelList";
 
 const SidePanel = () => {
     const [open, setOpen] = useState(false);
@@ -27,9 +28,7 @@ const SidePanel = () => {
                         </Popup>
                     </span>
                     </Menu.Header>
-                    {[...new Array(10)].map((prop, index) => (
-                        <Menu.Item key={index} name={"A"} as={"a"} icon={"hashtag"}/>
-                    ))}
+                   <ChannelList />
                 </Menu.Item>
             </Menu>
 
