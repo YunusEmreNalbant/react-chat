@@ -56,7 +56,7 @@ const CreateChannelForm = ({open, onOpen, onClose}) => {
             </Modal.Content>
             <Modal.Actions>
                 <Button color={"black"} onClick={() => onClose()}> Vazgeç </Button>
-                <Button icon={"checkmark"} positive onClick={() => handleSubmit(onSubmit)()}> Oluştur </Button>
+                <Button content={"Oluştur"} icon={"checkmark"} positive onClick={() => handleSubmit(onSubmit)()}/>
             </Modal.Actions>
         </Modal>
     );

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Popup, Menu, Icon} from "semantic-ui-react";
 import CreateChannelForm from "../Channels/CreateChannelForm";
 import ChannelList from "../Channels/ChannelList";
-
+import UserPanel from "../UserPanel/UserPanel"
 const SidePanel = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -16,7 +16,7 @@ const SidePanel = () => {
             <Menu vertical inverted secondary fixed={"left"} color={"blue"}
                   style={{width: "346px", fontSize: "1.3rem"}}>
                 <Menu.Item>
-
+                    <UserPanel />
                 </Menu.Item>
                 <Menu.Item>
                     <Menu.Header>
@@ -28,7 +28,7 @@ const SidePanel = () => {
                         </Popup>
                     </span>
                     </Menu.Header>
-                   <ChannelList />
+                    <ChannelList/>
                 </Menu.Item>
             </Menu>
 
