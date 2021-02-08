@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useFirebaseConnect, isLoaded, isEmpty} from "react-redux-firebase";
-import {useSelector,useDispatch} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {Menu} from "semantic-ui-react";
 import {setCurrentChannel} from "../store/actions/channel";
 
@@ -9,7 +9,17 @@ const ChannelList = () => {
     const channels = useSelector((state) => state.firebase.ordered.channels);
     const dispatch = useDispatch();
     const currentChannel = useSelector(state => state.channels.currentChannel);
-    const setActiveChannel = channel => {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        if (!mounted && !isEmpty(channels)) {
+            const {key, value} = channels[0];
+            setActiveChannel({key,...value});
+            setMounted(true)
+        }
+    }, []);
+
+    const setActiveChannel = (channel) => {
         dispatch(setCurrentChannel(channel));
     };
 
@@ -31,7 +41,7 @@ const ChannelList = () => {
                         as={"a"}
                         icon={"hashtag"}
                         active={currentChannel?.key === key}
-                        onClick={()=>setActiveChannel({key,...value})}
+                        onClick={() => setActiveChannel({key, ...value})}
 
                     />
                 ))
