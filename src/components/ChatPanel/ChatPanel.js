@@ -2,12 +2,20 @@ import React, {useState} from 'react';
 import {Segment, Header, Icon, Comment, Form, Input, Button} from "semantic-ui-react";
 import {useFirebase} from "react-redux-firebase";
 import {useSelector} from "react-redux";
+import {useFirebaseConnect,isEmpty,isLoaded} from "react-redux-firebase";
+import Message from "./Message";
 
 const ChatPanel = ({currentChannel}) => {
+    useFirebaseConnect([
+        {
+            path: `/messages/${currentChannel.key}`,
+            storeAs: "channelMessages"
+        }
+    ]);
     const firebase = useFirebase();
     const profile = useSelector(state => state.firebase.profile);
     const currentUserUid = useSelector(state => state.firebase.auth.uid);
-
+    const channelMessages = useSelector(state=>state.firebase.ordered.channelMessages)
     const [searchTerm, setSearchTerm] = useState("");
     const [content, setContent] = useState("");
 
@@ -53,7 +61,11 @@ const ChatPanel = ({currentChannel}) => {
 
             <Segment style={{position: "fixed", top: 55, bottom: 70, width: "81%"}}>
                 <Comment.Group style={{height: "80vh", overflowY: "auto", maxWidth: "100%"}}>
-
+                    {
+                        channelMessages && channelMessages.map(({key,value})=> (
+                            <Message key={key} message={value}/>
+                        ))
+                    }
                 </Comment.Group>
             </Segment>
 
